@@ -17,6 +17,19 @@ Stack: **React + Vite + Tailwind v4** (frontend, hospedado no Netlify) +
    no editor e clique em **Run**. Isso cria as tabelas `profiles`, `guests`,
    `seating_tables`, `budget_items`, `tasks` — já com as regras de segurança
    que garantem que cada noiva só vê os próprios dados.
+5. Repita o processo com `supabase/migration_002_remaining_modules.sql` (New
+   query → colar → Run). Isso cria as tabelas dos outros 7 módulos: Comes e
+   Bebes, Lista de presentes, Decoração, Músicas e ideias, Documentos, Dia do
+   casamento e Lua de mel — já com as mesmas regras de segurança.
+6. Repita novamente com `supabase/migration_003_showers_and_seed_data.sql`.
+   Isso cria os 4 módulos de chá (Bar, Panela, Lingerie, Casa Nova) e também
+   reescreve a função de "boas-vindas": a partir de agora, toda vez que
+   alguém se cadastrar, o sistema já vai preencher automaticamente todos os
+   módulos com alguns exemplos editáveis (convidados, orçamento, tarefas,
+   checklist de cada chá, etc.), pra a pessoa entender como cada tela
+   funciona sem começar do zero. Quem já tinha se cadastrado antes de rodar
+   essa migração não recebe os exemplos retroativamente — só quem se
+   cadastrar depois.
 5. Vá em **Project Settings → API**. Copie:
    - **Project URL**
    - **anon public key**
@@ -32,12 +45,12 @@ verdade, vale reativar e configurar o **Site URL** em
 
 ## 2. Rodar localmente
 
-\`\`\`bash
+```bash
 npm install
 cp .env.example .env
 # edite .env e cole a Project URL e a anon key do Supabase
 npm run dev
-\`\`\`
+```
 
 Abra `http://localhost:5173`, crie uma conta de teste e navegue pelos módulos.
 
@@ -68,34 +81,46 @@ Em **Site settings → Domain management → Add a domain**, coloque seu domíni
 e siga as instruções de DNS que o Netlify mostrar (geralmente um registro
 CNAME ou os nameservers do Netlify).
 
----
 
 ## Estrutura do projeto
 
-\`\`\`
+```
 src/
   lib/
-    supabase.js         cliente Supabase
-    AuthContext.jsx      contexto de autenticação (login/sessão/perfil)
+    supabase.js          cliente Supabase
+    AuthContext.jsx       contexto de autenticação (login/sessão/perfil)
   components/
-    Layout.jsx           casca com sidebar (desktop) / menu (mobile)
-    Sidebar.jsx           navegação entre módulos
-    RequireAuth.jsx       protege rotas internas
+    Layout.jsx            casca com sidebar (desktop) / menu (mobile)
+    Sidebar.jsx            navegação entre os 12 módulos
+    RequireAuth.jsx        protege rotas internas
     PageHeading.jsx / Ribbon.jsx   identidade visual (título + assinatura)
+    SimpleChecklist.jsx    checklist genérico reaproveitado em 3 módulos
   pages/
     Login.jsx / Signup.jsx
-    Dashboard.jsx         painel com contagem de convidados, RSVP, tarefas e saldo
-    Guests.jsx            cadastro e filtro de convidados
-    Tables.jsx            organização das mesas
-    Budget.jsx            orçamento planejado x custo real x saldo
-    Tasks.jsx             checklist com progresso
+    Dashboard.jsx          painel com contagem de convidados, RSVP, tarefas e saldo
+    Guests.jsx             cadastro e filtro de convidados
+    Tables.jsx             organização das mesas
+    Budget.jsx             orçamento planejado x custo real x saldo
+    Tasks.jsx              checklist de tarefas com progresso
+    FoodDrink.jsx          checklist de comes e bebes
+    Gifts.jsx              lista de presentes
+    Decor.jsx              checklist de decoração + mural de inspiração
+    Music.jsx              playlist por momento + ideias de atividades
+    Documents.jsx          repositório de links/documentos
+    WeddingDay.jsx         cronograma do dia, por etapa
+    Honeymoon.jsx          roteiro da lua de mel + checklist pré-viagem
+    ChaBar.jsx / ChaPanela.jsx / ChaLingerie.jsx / ChaCasaNova.jsx
+                            checklist de 10 passos para cada tipo de chá
 supabase/
-  schema.sql             schema completo com RLS
-\`\`\`
+  schema.sql                            módulos essenciais (MVP)
+  migration_002_remaining_modules.sql   os outros 7 módulos
+  migration_003_showers_and_seed_data.sql  chás + preenchimento automático
+```
 
-## Próximos módulos (estrutura já preparada para crescer)
+## Sistema Sim completo
 
-Comes e Bebes, Lista de presentes, Decoração, Músicas e novas ideias,
-Documentos, Dia do casamento e Lua de mel — já aparecem em "Em breve" na
-barra lateral. Dá pra construir cada um seguindo o mesmo padrão dos módulos
-atuais (tabela no Supabase + página React), quando quiser evoluir o produto.
+Os 12 módulos do planejador original já estão todos aqui. Ideias pra
+próximas evoluções: upload de imagem de verdade no mural de inspiração (via
+Supabase Storage — hoje é por link), campos extras nas Bases de dados
+(Fornecedores, Vestuário, Damas e Pajens, Documentos legais), e um plano
+pago/gratuito diferenciando funcionalidades por conta.
