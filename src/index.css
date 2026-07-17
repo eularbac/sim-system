@@ -1,0 +1,81 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Karla:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+@theme {
+  /* ---- Sistema Sim palette: dusty rose + warm terracotta + espresso ---- */
+  --color-blush-50: #fdf7f5;
+  --color-blush-100: #fbeee9;
+  --color-blush-200: #f3dcd3;
+  --color-rose-300: #e6b8bd;
+  --color-rose-400: #d693a0;
+  --color-rose-500: #c97b84;
+  --color-rose-600: #b05f6c;
+  --color-rose-700: #8c4753;
+
+  --color-terracotta-400: #cf8358;
+  --color-terracotta-500: #c3703f;
+  --color-terracotta-600: #a85a30;
+
+  --color-sage-400: #a3ad8c;
+  --color-sage-500: #8b9574;
+  --color-sage-600: #717a5c;
+
+  --color-gold-400: #c9a565;
+  --color-gold-500: #b8935a;
+
+  --color-espresso-50: #f8f4f2;
+  --color-espresso-300: #a68d86;
+  --color-espresso-500: #6b524c;
+  --color-espresso-700: #3a2b28;
+  --color-espresso-900: #241a18;
+
+  --font-display: 'Fraunces', 'Georgia', serif;
+  --font-body: 'Karla', 'Helvetica Neue', sans-serif;
+  --font-ledger: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-espresso-700);
+  background-color: var(--color-blush-50);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-ledger {
+  font-family: var(--font-ledger);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Focus visibility */
+:focus-visible {
+  outline: 2px solid var(--color-rose-500);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-blush-50);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-rose-300);
+  border-radius: 8px;
+}
