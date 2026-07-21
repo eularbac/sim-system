@@ -93,7 +93,7 @@ export default function SimpleChecklist({ table, placeholder = 'Adicionar item..
               <button
                 onClick={() => toggle(it.id, it.feito)}
                 aria-label={it.feito ? 'Marcar como não feito' : 'Marcar como feito'}
-                className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-colors ${
+                className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-150 hover:scale-110 active:scale-90 ${
                   it.feito ? 'bg-sage-500 border-sage-500 text-white' : 'border-rose-300'
                 }`}
               >

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../lib/AuthContext'
 import PageHeading from '../components/PageHeading'
+import Avatar from '../components/Avatar'
 
 const RSVP_OPTIONS = ['Aguardando', 'Confirmado', 'Recusado']
 const FAIXA_OPTIONS = ['Adulto', 'Criança']
@@ -117,7 +118,7 @@ export default function Guests() {
         </label>
         <button
           type="submit"
-          className="rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-body text-sm font-medium px-5 py-2.5 transition-colors"
+          className="rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-body text-sm font-medium px-5 py-2.5 transition-all hover:scale-[1.03] active:scale-[0.97] hover:shadow-md hover:shadow-rose-300/40"
         >
           Adicionar
         </button>
@@ -157,11 +158,20 @@ export default function Guests() {
                 </tr>
               </thead>
               <tbody>
-                {visibleGuests.map((g) => (
-                  <tr key={g.id} className="border-b border-rose-100 last:border-0">
+                {visibleGuests.map((g, i) => (
+                  <tr
+                    key={g.id}
+                    className="border-b border-rose-100 last:border-0 animate-fade-in-up"
+                    style={{ animationDelay: `${Math.min(i, 12) * 40}ms` }}
+                  >
                     <td className="px-4 py-2.5 text-espresso-900">
-                      {g.nome}
-                      <span className="ml-2 text-xs text-espresso-300">{g.faixa_etaria}</span>
+                      <div className="flex items-center gap-2.5">
+                        <Avatar name={g.nome} size={28} />
+                        <span>
+                          {g.nome}
+                          <span className="ml-2 text-xs text-espresso-300">{g.faixa_etaria}</span>
+                        </span>
+                      </div>
                     </td>
                     <td className="px-4 py-2.5 text-espresso-500">{g.proximidade || '—'}</td>
                     <td className="px-4 py-2.5">

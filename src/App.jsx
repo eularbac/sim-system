@@ -20,6 +20,9 @@ import ChaBar from './pages/ChaBar'
 import ChaPanela from './pages/ChaPanela'
 import ChaLingerie from './pages/ChaLingerie'
 import ChaCasaNova from './pages/ChaCasaNova'
+import Vendors from './pages/Vendors'
+import Attire from './pages/Attire'
+import WeddingParty from './pages/WeddingParty'
 
 export default function App() {
   return (
@@ -51,6 +54,9 @@ export default function App() {
             <Route path="/cha-de-panela" element={<ChaPanela />} />
             <Route path="/cha-de-lingerie" element={<ChaLingerie />} />
             <Route path="/cha-de-casa-nova" element={<ChaCasaNova />} />
+            <Route path="/fornecedores" element={<Vendors />} />
+            <Route path="/vestuario" element={<Attire />} />
+            <Route path="/padrinhos-e-madrinhas" element={<WeddingParty />} />
           </Route>
         </Routes>
       </AuthProvider>

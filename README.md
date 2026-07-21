@@ -30,6 +30,13 @@ Stack: **React + Vite + Tailwind v4** (frontend, hospedado no Netlify) +
    funciona sem começar do zero. Quem já tinha se cadastrado antes de rodar
    essa migração não recebe os exemplos retroativamente — só quem se
    cadastrar depois.
+7. Repita mais uma vez com `supabase/migration_004_vendors_attire_party.sql`.
+   Isso adiciona Fornecedores, Vestuário e Padrinhos/Madrinhas — e estende o
+   preenchimento automático pra incluir exemplos desses 3 módulos também.
+8. Por fim, rode `supabase/migration_005_mural_seed_images.sql`. Isso
+   adiciona 3 ilustrações de exemplo (arco floral, mesa posta, bolo) ao
+   mural de inspiração de decoração de toda conta nova — são SVGs originais
+   gerados pelo próprio sistema, sem depender de link externo.
 5. Vá em **Project Settings → API**. Copie:
    - **Project URL**
    - **anon public key**
@@ -95,6 +102,10 @@ src/
     RequireAuth.jsx        protege rotas internas
     PageHeading.jsx / Ribbon.jsx   identidade visual (título + assinatura)
     SimpleChecklist.jsx    checklist genérico reaproveitado em 3 módulos
+    ShowerChecklist.jsx    checklist genérico dos 4 módulos de chá
+    AnimatedNumber.jsx     contador animado (usado no Painel)
+    BouquetArt.jsx         ilustração original em SVG (login, cadastro, painel)
+    Avatar.jsx             avatar com iniciais e cor determinística (convidados)
   pages/
     Login.jsx / Signup.jsx
     Dashboard.jsx          painel com contagem de convidados, RSVP, tarefas e saldo
@@ -111,11 +122,25 @@ src/
     Honeymoon.jsx          roteiro da lua de mel + checklist pré-viagem
     ChaBar.jsx / ChaPanela.jsx / ChaLingerie.jsx / ChaCasaNova.jsx
                             checklist de 10 passos para cada tipo de chá
+    Vendors.jsx            fornecedores, vinculados ao orçamento
+    Attire.jsx             vestuário (item, preço, status, para quem)
+    WeddingParty.jsx       padrinhos, madrinhas, damas e pajens
 supabase/
-  schema.sql                            módulos essenciais (MVP)
-  migration_002_remaining_modules.sql   os outros 7 módulos
-  migration_003_showers_and_seed_data.sql  chás + preenchimento automático
+  schema.sql                                módulos essenciais (MVP)
+  migration_002_remaining_modules.sql       os outros 7 módulos
+  migration_003_showers_and_seed_data.sql   chás + preenchimento automático
+  migration_004_vendors_attire_party.sql    fornecedores, vestuário, padrinhos/madrinhas
+  migration_005_mural_seed_images.sql       ilustrações de exemplo no mural
 ```
+
+## Estilo e animações
+
+Fade-in suave a cada troca de página, números do Painel contando de 0 até o
+valor real, cards com leve elevação ao passar o mouse, botões com feedback
+de toque, e uma ilustração floral original (sem depender de banco de
+imagens) nas telas de login, cadastro e painel. Tudo respeita
+`prefers-reduced-motion` — quem usa essa preferência de acessibilidade não
+vê as animações.
 
 ## Sistema Sim completo
 

@@ -70,7 +70,7 @@ function InspirationBoard() {
         </label>
         <button
           type="submit"
-          className="rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-body text-sm font-medium px-5 py-2.5 transition-colors"
+          className="rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-body text-sm font-medium px-5 py-2.5 transition-all hover:scale-[1.03] active:scale-[0.97] hover:shadow-md hover:shadow-rose-300/40"
         >
           Salvar
         </button>
@@ -85,7 +85,7 @@ function InspirationBoard() {
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
           {images.map((img) => (
-            <div key={img.id} className="bg-white/70 rounded-2xl border border-rose-200/60 overflow-hidden group relative">
+            <div key={img.id} className="bg-white/70 rounded-2xl border border-rose-200/60 overflow-hidden group relative card-hover">
               <img
                 src={img.image_url}
                 alt={img.nota || 'Inspiração de decoração'}

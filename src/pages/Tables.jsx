@@ -82,7 +82,7 @@ export default function Tables() {
         </label>
         <button
           type="submit"
-          className="rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-body text-sm font-medium px-5 py-2.5 transition-colors"
+          className="rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-body text-sm font-medium px-5 py-2.5 transition-all hover:scale-[1.03] active:scale-[0.97] hover:shadow-md hover:shadow-rose-300/40"
         >
           Criar mesa
         </button>
@@ -101,7 +101,7 @@ export default function Tables() {
             const ocupantes = guests.filter((g) => g.table_id === t.id)
             const cheia = ocupantes.length >= t.capacidade
             return (
-              <div key={t.id} className="bg-white/70 rounded-2xl border border-rose-200/60 p-5">
+              <div key={t.id} className="bg-white/70 rounded-2xl border border-rose-200/60 p-5 card-hover">
                 <div className="flex justify-between items-start mb-3">
                   <p className="font-display text-lg text-espresso-900">{t.nome}</p>
                   <button

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import Ribbon from '../components/Ribbon'
+import BouquetArt from '../components/BouquetArt'
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -25,7 +26,10 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-blush-50 flex items-center justify-center px-6 py-12">
-      <div className="w-full max-w-sm">
+      <div className="w-full max-w-sm animate-fade-in-up">
+        <div className="text-center mb-6">
+          <BouquetArt width={100} className="mx-auto animate-float" />
+        </div>
         <div className="text-center mb-10">
           <p className="font-display italic text-3xl text-rose-700">Sistema Sim</p>
           <Ribbon width={72} />
@@ -68,7 +72,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full mt-5 rounded-xl bg-rose-500 hover:bg-rose-600 disabled:opacity-60 text-white font-body font-medium py-2.5 transition-colors"
+            className="w-full mt-5 rounded-xl bg-rose-500 hover:bg-rose-600 disabled:opacity-60 text-white font-body font-medium py-2.5 transition-all hover:scale-[1.02] active:scale-[0.98] hover:shadow-md hover:shadow-rose-300/40"
           >
             {loading ? 'Entrando...' : 'Entrar'}
           </button>

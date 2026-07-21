@@ -1,9 +1,10 @@
 import { useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import Sidebar from './Sidebar'
 
 export default function Layout() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const location = useLocation()
 
   return (
     <div className="min-h-screen flex bg-blush-50">
@@ -40,7 +41,7 @@ export default function Layout() {
       )}
 
       <main className="flex-1 min-w-0 px-5 md:px-12 py-10 md:py-12 mt-14 md:mt-0">
-        <div className="max-w-5xl mx-auto">
+        <div key={location.pathname} className="max-w-5xl mx-auto animate-fade-in-up">
           <Outlet />
         </div>
       </main>

@@ -93,7 +93,7 @@ export default function Tasks() {
         </label>
         <button
           type="submit"
-          className="rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-body text-sm font-medium px-5 py-2.5 transition-colors"
+          className="rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-body text-sm font-medium px-5 py-2.5 transition-all hover:scale-[1.03] active:scale-[0.97] hover:shadow-md hover:shadow-rose-300/40"
         >
           Adicionar
         </button>
@@ -113,7 +113,7 @@ export default function Tasks() {
               <button
                 onClick={() => toggleTask(t.id, t.feito)}
                 aria-label={t.feito ? 'Marcar como não feita' : 'Marcar como feita'}
-                className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-colors ${
+                className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-150 hover:scale-110 active:scale-90 ${
                   t.feito ? 'bg-sage-500 border-sage-500 text-white' : 'border-rose-300'
                 }`}
               >
