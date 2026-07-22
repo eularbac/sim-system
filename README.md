@@ -37,6 +37,14 @@ Stack: **React + Vite + Tailwind v4** (frontend, hospedado no Netlify) +
    adiciona 3 ilustrações de exemplo (arco floral, mesa posta, bolo) ao
    mural de inspiração de decoração de toda conta nova — são SVGs originais
    gerados pelo próprio sistema, sem depender de link externo.
+9. Rode também `supabase/migration_006_rich_seed_data.sql` — essa é a
+   migração mais completa: reescreve o preenchimento automático pra deixar
+   **pelo menos 10 itens em cada módulo** (orçamento já com DJ, banda,
+   buffet, iluminação, palco e mais 8 itens, cada um vinculado ao
+   fornecedor correspondente; 10 convidados em 3 mesas; 10 tarefas; 10
+   músicas; 10 fornecedores; e assim por diante em todos os módulos). Essa é
+   a versão definitiva — não precisa rodar a 003 de novo depois dela, já
+   que a 006 substitui a mesma função por completo.
 5. Vá em **Project Settings → API**. Copie:
    - **Project URL**
    - **anon public key**
@@ -131,6 +139,7 @@ supabase/
   migration_003_showers_and_seed_data.sql   chás + preenchimento automático
   migration_004_vendors_attire_party.sql    fornecedores, vestuário, padrinhos/madrinhas
   migration_005_mural_seed_images.sql       ilustrações de exemplo no mural
+  migration_006_rich_seed_data.sql          preenchimento completo (10+ por módulo) — a mais recente
 ```
 
 ## Estilo e animações
