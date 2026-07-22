@@ -27,7 +27,7 @@ const chaModules = [
 ]
 
 export default function Sidebar({ onNavigate }) {
-  const { profile, signOut } = useAuth()
+  const { profile } = useAuth()
 
   return (
     <aside className="h-full w-full bg-blush-100 flex flex-col border-r border-rose-200/60">
@@ -85,15 +85,6 @@ export default function Sidebar({ onNavigate }) {
           ))}
         </ul>
       </nav>
-
-      <div className="px-3 pb-6 pt-2 border-t border-rose-200/60">
-        <button
-          onClick={signOut}
-          className="w-full text-left px-3 py-2.5 rounded-xl font-body text-sm text-espresso-500 hover:bg-blush-200 transition-colors"
-        >
-          Sair da conta
-        </button>
-      </div>
     </aside>
   )
 }

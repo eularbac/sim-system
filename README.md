@@ -1,10 +1,39 @@
 # Sistema Sim
 
-Organizador de casamento multi-noiva (SaaS), com login próprio e dados isolados
-por conta. MVP com 5 módulos: Painel, Convidados, Mesas, Orçamento e Tarefas.
+Organizador de casamento multi-noiva (SaaS), pensado para login próprio e
+dados isolados por conta — mas **atualmente rodando em "modo sem login"**
+enquanto o produto está em construção (veja a seção abaixo).
 
 Stack: **React + Vite + Tailwind v4** (frontend, hospedado no Netlify) +
 **Supabase** (autenticação + banco Postgres + Row Level Security).
+
+---
+
+## ⚠️ Modo sem login (temporário)
+
+Pra facilitar edição e testes, o site **não mostra mais tela de login**.
+Quem abrir o site entra direto, usando uma conta fixa configurada nas
+variáveis `VITE_DEV_EMAIL` / `VITE_DEV_PASSWORD` (veja a seção 2). Isso
+significa que **todo mundo que acessa o site publicado vê e edita os
+mesmos dados** — não há isolamento por noiva enquanto esse modo estiver
+ativo. Ideal para editar/mostrar o produto agora; **não é o modo certo
+para vender de verdade**.
+
+**Para reativar o login antes de lançar:**
+1. Restaure as rotas `/entrar` e `/cadastro` em `src/App.jsx` (os arquivos
+   `Login.jsx` e `Signup.jsx` continuam intactos em `src/pages`, só não
+   estão roteados).
+2. Troque a lógica de login automático em `src/lib/AuthContext.jsx` de
+   volta pra versão que só verifica a sessão existente (sem
+   `signInWithPassword` automático) — o comentário no topo do arquivo
+   explica os passos.
+3. Remova `VITE_DEV_EMAIL` / `VITE_DEV_PASSWORD` das Environment
+   Variables do Netlify.
+4. Se quiser, reative a confirmação de e-mail no Supabase (Authentication
+   → Providers → Email).
+
+Se preferir, posso fazer essa reversão pra você quando chegar a hora — é
+só pedir.
 
 ---
 
@@ -63,11 +92,17 @@ verdade, vale reativar e configurar o **Site URL** em
 ```bash
 npm install
 cp .env.example .env
-# edite .env e cole a Project URL e a anon key do Supabase
+# edite .env: cole a Project URL e a anon key do Supabase, e também o
+# e-mail/senha da sua conta de teste (VITE_DEV_EMAIL/VITE_DEV_PASSWORD —
+# obrigatórios nesse modo sem login)
 npm run dev
 ```
 
-Abra `http://localhost:5173`, crie uma conta de teste e navegue pelos módulos.
+Abra `http://localhost:5173` — já entra direto no Painel, sem tela de login.
+
+Se aparecer a tela **"Configuração pendente"**, confira se
+`VITE_DEV_EMAIL` e `VITE_DEV_PASSWORD` estão certinhos no `.env` e se essa
+conta realmente existe no seu projeto Supabase (Authentication → Users).
 
 ---
 
@@ -79,9 +114,14 @@ Abra `http://localhost:5173`, crie uma conta de teste e navegue pelos módulos.
 ### Caminho recomendado (deploy contínuo via Git)
 1. Suba este projeto para um repositório no GitHub.
 2. No Netlify: **Add new site → Import an existing project** → conecte o repo.
-3. Em **Site settings → Environment variables**, adicione:
+3. Em **Site settings → Environment variables**, adicione as quatro:
    - `VITE_SUPABASE_URL`
    - `VITE_SUPABASE_ANON_KEY`
+   - `VITE_DEV_EMAIL`
+   - `VITE_DEV_PASSWORD`
+
+   (As duas últimas são só pro modo sem login funcionar no site publicado —
+   veja o aviso no topo deste arquivo. Remova-as quando reativar o login.)
 4. Deploy. A cada `git push`, o Netlify atualiza o site sozinho.
 
 ### Caminho rápido (Netlify Drop, como você já usa)

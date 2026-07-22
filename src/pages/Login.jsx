@@ -11,6 +11,10 @@ export default function Login() {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
+  const devEmail = import.meta.env.VITE_DEV_EMAIL
+  const devPassword = import.meta.env.VITE_DEV_PASSWORD
+  const hasDevLogin = Boolean(devEmail && devPassword)
+
   async function handleSubmit(e) {
     e.preventDefault()
     setError(null)
@@ -19,6 +23,18 @@ export default function Login() {
     setLoading(false)
     if (error) {
       setError('E-mail ou senha incorretos. Confira e tente novamente.')
+      return
+    }
+    navigate('/')
+  }
+
+  async function handleDevLogin() {
+    setError(null)
+    setLoading(true)
+    const { error } = await supabase.auth.signInWithPassword({ email: devEmail, password: devPassword })
+    setLoading(false)
+    if (error) {
+      setError('Não consegui entrar com a conta de teste. Confira VITE_DEV_EMAIL/VITE_DEV_PASSWORD no .env.')
       return
     }
     navigate('/')
@@ -77,6 +93,16 @@ export default function Login() {
             {loading ? 'Entrando...' : 'Entrar'}
           </button>
         </form>
+
+        {hasDevLogin && (
+          <button
+            onClick={handleDevLogin}
+            disabled={loading}
+            className="w-full mt-3 rounded-xl border border-dashed border-terracotta-500 text-terracotta-600 font-body text-sm font-medium py-2.5 hover:bg-terracotta-500/10 transition-colors disabled:opacity-60"
+          >
+            🔧 Login rápido (conta de teste — só aparece em dev)
+          </button>
+        )}
 
         <p className="font-body text-sm text-espresso-500 text-center mt-6">
           Ainda não tem conta?{' '}
